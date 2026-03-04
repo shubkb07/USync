@@ -24,7 +24,7 @@ usync-app gui
 ## Build a `.deb` package
 
 ```bash
-sudo apt-get install -y build-essential devscripts debhelper dh-python python3-all python3-setuptools
+sudo apt-get install -y build-essential devscripts debhelper dh-python python3-all python3-setuptools pybuild-plugin-pyproject
 
 dpkg-buildpackage -us -uc -b
 ```
