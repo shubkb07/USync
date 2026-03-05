@@ -1,2 +1,3 @@
+target/release/usync-app usr/bin/
 assets/usync-app.desktop usr/share/applications/
 assets/usync-app.svg usr/share/icons/hicolor/scalable/apps/usync-app.svg

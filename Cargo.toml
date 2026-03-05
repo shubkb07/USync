@@ -1,0 +1,18 @@
+[package]
+name = "usync-app"
+version = "0.1.0"
+edition = "2021"
+description = "USync Ubuntu app with CLI and GTK GUI clipboard history"
+license = "MIT"
+
+[[bin]]
+name = "usync-app"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+clap = { version = "4", features = ["derive"] }
+glib = "0.19"
+gtk4 = "0.8"
+arboard = "3"
