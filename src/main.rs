@@ -48,7 +48,7 @@ fn run_gui() -> Result<()> {
         .build();
 
     app.connect_activate(build_ui);
-    app.run();
+    app.run_with_args::<&str>(&[]);
     Ok(())
 }
 
