@@ -7,6 +7,17 @@ USync is now implemented in **Rust** with:
 
 ## What to install (Ubuntu/Debian)
 
+## Rust toolchain requirement
+
+This project currently requires a modern Cargo/Rust toolchain (**Rust 1.92+ recommended**, and at least a Cargo version that supports lockfile v4 and edition2024 dependencies).
+
+If you see errors like `lock file version 4` or `edition2024`, update Rust with:
+
+```bash
+rustup update
+rustup default stable
+```
+
 ```bash
 sudo apt update
 sudo apt install -y \
