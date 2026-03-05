@@ -9,6 +9,6 @@ Rules-Requires-Root: no
 Package: usync-app
 Architecture: all
 Depends: ${misc:Depends}, ${python3:Depends}, python3-tk
-Description: Simple Ubuntu application with GUI and CLI
- A lightweight Python application that provides a command-line interface
- and a Tkinter desktop interface in a single package.
+Description: Ubuntu app with GUI, CLI, and clipboard history
+ A lightweight Python application with CLI and Tkinter GUI, including
+ clipboard history view and desktop launcher integration.
