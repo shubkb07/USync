@@ -5,6 +5,7 @@ use anyhow::Result;
 use arboard::Clipboard;
 use clap::{Parser, Subcommand};
 use glib::{self, ControlFlow};
+use gtk4::glib::set_application_name;
 use gtk4::prelude::*;
 use gtk4::{
     Application, ApplicationWindow, Box as GtkBox, Button, Label, ListBox, ListBoxRow, Orientation,
@@ -34,6 +35,7 @@ fn main() -> Result<()> {
 }
 
 fn run_gui() -> Result<()> {
+    set_application_name("USync Super App");
     let app = Application::builder().application_id("com.usync.app").build();
     app.connect_activate(build_ui);
     app.run_with_args::<&str>(&[]);
@@ -44,6 +46,7 @@ fn build_ui(app: &Application) {
     let window = ApplicationWindow::builder()
         .application(app)
         .title("USync Super App")
+        .icon_name("usync-app")
         .default_width(900)
         .default_height(600)
         .build();
@@ -81,7 +84,7 @@ fn build_ui(app: &Application) {
     clip_page.set_margin_start(14);
     clip_page.set_margin_end(14);
 
-    let title = Label::new(Some("Clipboard Manager"));
+    let title = Label::new(Some("Clipboard"));
     title.set_xalign(0.0);
     title.add_css_class("title-2");
     clip_page.append(&title);
