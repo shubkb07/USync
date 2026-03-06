@@ -1,6 +1,6 @@
-# USync Super App (Rust + GTK)
+# USync (Rust + GTK)
 
-USync is now a **super app shell** with multiple tools. Current module:
+USync currently includes these modules:
 - **Clipboard Manager** (persistent history)
 - **Clipboard Settings** (history size + polling interval)
 
@@ -56,7 +56,7 @@ Install it:
 sudo dpkg -i target/debian/usync-app_0.2.0_amd64.deb
 ```
 
-After install, search app menu for **USync Super App**.
+After install, search app menu for **USync**.
 
 Package metadata now ships AppStream metainfo (`com.usync.app.metainfo.xml`) and a desktop id
 (`com.usync.app.desktop`) so software stores can resolve icon/description before install.

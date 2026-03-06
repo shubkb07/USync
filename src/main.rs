@@ -15,7 +15,7 @@ use gtk4::{
 use usync_app::{AppSettings, ClipboardStore};
 
 #[derive(Parser, Debug)]
-#[command(name = "usync-app", about = "USync Super App")]
+#[command(name = "usync-app", about = "USync")]
 struct Cli {
     #[command(subcommand)]
     command: Option<Command>,
@@ -35,7 +35,7 @@ fn main() -> Result<()> {
 }
 
 fn run_gui() -> Result<()> {
-    set_application_name("USync Super App");
+    set_application_name("USync");
     let app = Application::builder().application_id("com.usync.app").build();
     app.connect_activate(build_ui);
     app.run_with_args::<&str>(&[]);
@@ -45,8 +45,8 @@ fn run_gui() -> Result<()> {
 fn build_ui(app: &Application) {
     let window = ApplicationWindow::builder()
         .application(app)
-        .title("USync Super App")
-        .icon_name("usync-app")
+        .title("USync")
+        .icon_name("com.usync.app")
         .default_width(900)
         .default_height(600)
         .build();
