@@ -58,6 +58,9 @@ sudo dpkg -i target/debian/usync-app_0.2.0_amd64.deb
 
 After install, search app menu for **USync Super App**.
 
+Package metadata now ships AppStream metainfo (`com.usync.app.metainfo.xml`) and a desktop id
+(`com.usync.app.desktop`) so software stores can resolve icon/description before install.
+
 ## Notes on top-bar clipboard indicator
 
 The current app provides a full clipboard module inside the GTK app and persists history to disk.

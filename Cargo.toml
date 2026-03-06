@@ -30,6 +30,7 @@ section = "utils"
 priority = "optional"
 assets = [
   ["target/release/usync-app", "usr/bin/", "755"],
-  ["assets/usync-app.desktop", "usr/share/applications/usync-app.desktop", "644"],
+  ["assets/usync-app.desktop", "usr/share/applications/com.usync.app.desktop", "644"],
+  ["assets/com.usync.app.metainfo.xml", "usr/share/metainfo/com.usync.app.metainfo.xml", "644"],
   ["assets/usync-app.svg", "usr/share/icons/hicolor/scalable/apps/usync-app.svg", "644"],
 ]

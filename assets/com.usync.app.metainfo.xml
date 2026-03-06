@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.usync.app</id>
+  <name>USync Super App</name>
+  <summary>Clipboard manager module for the USync super app</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <description>
+    <p>
+      USync Super App starts with a clipboard module that stores clipboard history,
+      restores entries between sessions, and provides configurable history limits.
+    </p>
+  </description>
+  <launchable type="desktop-id">com.usync.app.desktop</launchable>
+  <provides>
+    <binary>usync-app</binary>
+  </provides>
+  <categories>
+    <category>Utility</category>
+    <category>Productivity</category>
+  </categories>
+  <developer id="com.usync">
+    <name>USync Maintainers</name>
+  </developer>
+  <url type="homepage">https://example.com/usync</url>
+</component>

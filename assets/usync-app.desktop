@@ -10,3 +10,4 @@ Categories=Utility;Productivity;
 StartupNotify=true
 Keywords=clipboard;history;productivity;usync;
 StartupWMClass=com.usync.app
+X-GNOME-FullName=USync Super App
