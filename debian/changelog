@@ -1,0 +1,5 @@
+usync-app (0.1.0-1) unstable; urgency=medium
+
+  * Migrate application from Python to Rust + GTK.
+
+ -- USync Maintainers <maintainers@example.com>  Thu, 05 Mar 2026 00:00:00 +0000

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=USync Clipboard
+Comment=USync app with calculator and clipboard history
+Exec=usync-app gui
+Icon=usync-app
+Terminal=false
+Categories=Utility;
+StartupNotify=true
