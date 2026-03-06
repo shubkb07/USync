@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=USync
+Comment=USync with clipboard manager and settings
+Exec=usync-app gui
+Icon=com.usync.app
+Terminal=false
+Categories=Utility;Productivity;
+StartupNotify=true
+Keywords=clipboard;history;productivity;usync;
+StartupWMClass=com.usync.app
+X-GNOME-FullName=USync

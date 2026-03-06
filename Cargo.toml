@@ -1,0 +1,37 @@
+[package]
+name = "usync-app"
+version = "0.2.0"
+edition = "2021"
+description = "USync with GTK clipboard manager"
+license = "MIT"
+
+[[bin]]
+name = "usync-app"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+arboard = "3"
+clap = { version = "4", features = ["derive"] }
+glib = "0.19"
+gtk4 = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+dirs = "5"
+
+[package.metadata.deb]
+name = "usync-app"
+maintainer = "USync Maintainers <maintainers@example.com>"
+copyright = "2026, USync Maintainers"
+license-file = ["LICENSE", "0"]
+extended-description = "USync super app with clipboard history, persistence, and GTK desktop UI."
+depends = "$auto, libgtk-4-1"
+section = "utils"
+priority = "optional"
+assets = [
+  ["target/release/usync-app", "usr/bin/", "755"],
+  ["assets/usync-app.desktop", "usr/share/applications/com.usync.app.desktop", "644"],
+  ["assets/com.usync.app.metainfo.xml", "usr/share/metainfo/com.usync.app.metainfo.xml", "644"],
+  ["assets/usync-app.svg", "usr/share/icons/hicolor/scalable/apps/usync-app.svg", "644"],
+  ["assets/com.usync.app.svg", "usr/share/icons/hicolor/scalable/apps/com.usync.app.svg", "644"],
+]
