@@ -1,10 +1,11 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=USync Clipboard
-Comment=USync app with calculator and clipboard history
+Name=USync Super App
+Comment=USync super app with clipboard manager and settings
 Exec=usync-app gui
 Icon=usync-app
 Terminal=false
-Categories=Utility;
+Categories=Utility;Productivity;
 StartupNotify=true
+Keywords=clipboard;history;productivity;usync;

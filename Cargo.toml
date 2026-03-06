@@ -1,8 +1,8 @@
 [package]
 name = "usync-app"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
-description = "USync Ubuntu app with CLI and GTK GUI clipboard history"
+description = "USync Super App with GTK clipboard manager"
 license = "MIT"
 
 [[bin]]
@@ -11,8 +11,25 @@ path = "src/main.rs"
 
 [dependencies]
 anyhow = "1"
-chrono = { version = "0.4", default-features = false, features = ["clock"] }
+arboard = "3"
 clap = { version = "4", features = ["derive"] }
 glib = "0.19"
 gtk4 = "0.8"
-arboard = "3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+dirs = "5"
+
+[package.metadata.deb]
+name = "usync-app"
+maintainer = "USync Maintainers <maintainers@example.com>"
+copyright = "2026, USync Maintainers"
+license-file = ["LICENSE", "0"]
+extended-description = "USync super app with clipboard history, persistence, and GTK desktop UI."
+depends = "$auto, libgtk-4-1"
+section = "utils"
+priority = "optional"
+assets = [
+  ["target/release/usync-app", "usr/bin/", "755"],
+  ["assets/usync-app.desktop", "usr/share/applications/usync-app.desktop", "644"],
+  ["assets/usync-app.svg", "usr/share/icons/hicolor/scalable/apps/usync-app.svg", "644"],
+]

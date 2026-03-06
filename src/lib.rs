@@ -1,29 +1,61 @@
-use chrono::Local;
+use std::fs;
+use std::path::PathBuf;
 
-pub fn get_status_message(name: &str) -> String {
-    let now = Local::now().format("%Y-%m-%d %H:%M:%S");
-    format!("Hello, {name}! USync is running at {now}.")
+use anyhow::Result;
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct AppSettings {
+    pub max_items: usize,
+    pub poll_interval_seconds: u32,
 }
 
-pub fn add_numbers(a: f64, b: f64) -> f64 {
-    a + b
+impl Default for AppSettings {
+    fn default() -> Self {
+        Self {
+            max_items: 50,
+            poll_interval_seconds: 1,
+        }
+    }
 }
 
-#[derive(Debug, Clone)]
-pub struct ClipboardHistory {
-    max_items: usize,
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ClipboardStore {
+    settings: AppSettings,
     items: Vec<String>,
 }
 
-impl ClipboardHistory {
-    pub fn new(max_items: usize) -> Self {
+impl Default for ClipboardStore {
+    fn default() -> Self {
         Self {
-            max_items,
+            settings: AppSettings::default(),
             items: Vec::new(),
         }
     }
+}
 
-    pub fn add(&mut self, text: &str) {
+impl ClipboardStore {
+    pub fn load() -> Self {
+        let path = store_path();
+        if let Ok(content) = fs::read_to_string(path) {
+            if let Ok(store) = serde_json::from_str::<ClipboardStore>(&content) {
+                return store;
+            }
+        }
+        Self::default()
+    }
+
+    pub fn save(&self) -> Result<()> {
+        let path = store_path();
+        if let Some(parent) = path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+        let payload = serde_json::to_string_pretty(self)?;
+        fs::write(path, payload)?;
+        Ok(())
+    }
+
+    pub fn add_clipboard_entry(&mut self, text: &str) {
         let value = text.trim();
         if value.is_empty() {
             return;
@@ -34,12 +66,26 @@ impl ClipboardHistory {
         }
 
         self.items.insert(0, value.to_string());
-        self.items.truncate(self.max_items);
+        self.items.truncate(self.settings.max_items);
     }
 
     pub fn items(&self) -> &[String] {
         &self.items
     }
+
+    pub fn settings(&self) -> &AppSettings {
+        &self.settings
+    }
+
+    pub fn update_settings(&mut self, settings: AppSettings) {
+        self.settings = settings;
+        self.items.truncate(self.settings.max_items);
+    }
+}
+
+fn store_path() -> PathBuf {
+    let base = dirs::config_dir().unwrap_or_else(|| PathBuf::from("."));
+    base.join("usync-app").join("clipboard_store.json")
 }
 
 #[cfg(test)]
@@ -47,25 +93,24 @@ mod tests {
     use super::*;
 
     #[test]
-    fn add_works() {
-        assert_eq!(add_numbers(2.0, 3.0), 5.0);
+    fn clipboard_store_unique_and_recent() {
+        let mut store = ClipboardStore::default();
+        store.add_clipboard_entry("one");
+        store.add_clipboard_entry("two");
+        store.add_clipboard_entry("one");
+        assert_eq!(store.items(), &["one", "two"]);
     }
 
     #[test]
-    fn status_contains_name() {
-        let msg = get_status_message("Alice");
-        assert!(msg.contains("Alice"));
-        assert!(msg.contains("USync is running"));
-    }
-
-    #[test]
-    fn clipboard_history_unique_recency() {
-        let mut history = ClipboardHistory::new(3);
-        history.add("one");
-        history.add("two");
-        history.add("one");
-        history.add("three");
-        history.add("four");
-        assert_eq!(history.items(), &["four", "three", "one"]);
+    fn settings_trim_items() {
+        let mut store = ClipboardStore::default();
+        for i in 0..5 {
+            store.add_clipboard_entry(&format!("item-{i}"));
+        }
+        store.update_settings(AppSettings {
+            max_items: 2,
+            poll_interval_seconds: 1,
+        });
+        assert_eq!(store.items().len(), 2);
     }
 }

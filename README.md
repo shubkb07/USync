@@ -1,22 +1,10 @@
-# USync App (Rust + GTK)
+# USync Super App (Rust + GTK)
 
-USync is now implemented in **Rust** with:
-- **CLI mode**
-- **GTK4 GUI mode**
-- **Clipboard history panel** (top of GUI)
+USync is now a **super app shell** with multiple tools. Current module:
+- **Clipboard Manager** (persistent history)
+- **Clipboard Settings** (history size + polling interval)
 
-## What to install (Ubuntu/Debian)
-
-## Rust toolchain requirement
-
-This project currently requires a modern Cargo/Rust toolchain (**Rust 1.92+ recommended**, and at least a Cargo version that supports lockfile v4 and edition2024 dependencies).
-
-If you see errors like `lock file version 4` or `edition2024`, update Rust with:
-
-```bash
-rustup update
-rustup default stable
-```
+## System requirements (Ubuntu/Debian)
 
 ```bash
 sudo apt update
@@ -24,19 +12,25 @@ sudo apt install -y \
   build-essential \
   pkg-config \
   libgtk-4-dev \
+  libglib2.0-dev \
   libxdo-dev \
   clang
-
-# Install Rust toolchain (if you don't have it)
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source "$HOME/.cargo/env"
 ```
 
-## Run locally (development)
+## Rust toolchain
+
+This project uses rustup-managed toolchains and is pinned by `rust-toolchain.toml`.
 
 ```bash
-cargo run -- --name Alice
-cargo run -- add 4 5
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+rustup update
+rustup default stable
+```
+
+## Run locally
+
+```bash
 cargo run -- gui
 ```
 
@@ -47,16 +41,24 @@ cargo build --release
 ./target/release/usync-app gui
 ```
 
-## Build a `.deb` package
+## Build `.deb` package (cargo-deb)
 
 ```bash
-sudo apt-get install -y debhelper-compat dh-cargo cargo rustc
-
-dpkg-buildpackage -us -uc -b
+cargo install cargo-deb
+cargo deb
 ```
 
-The generated `.deb` appears in parent directory (e.g. `../usync-app_0.1.0-1_all.deb`).
+Output package is created under `target/debian/`.
 
-## Desktop launcher
+Install it:
 
-After installing the `.deb`, open Ubuntu app menu and search for **USync Clipboard**.
+```bash
+sudo dpkg -i target/debian/usync-app_0.2.0_amd64.deb
+```
+
+After install, search app menu for **USync Super App**.
+
+## Notes on top-bar clipboard indicator
+
+The current app provides a full clipboard module inside the GTK app and persists history to disk.
+A GNOME top-bar clipboard indicator requires shell-extension style integration or tray/indicator service, which is planned as a separate module.
