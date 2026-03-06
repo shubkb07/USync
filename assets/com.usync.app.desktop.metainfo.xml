@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>com.usync.app</id>
-  <name>USync</name>
+  <id>com.usync.app.desktop</id>
+  <name>USync Super App</name>
   <summary>Clipboard manager module for USync</summary>
   <metadata_license>MIT</metadata_license>
   <project_license>MIT</project_license>
